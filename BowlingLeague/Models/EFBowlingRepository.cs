@@ -14,5 +14,24 @@ namespace BowlingLeague.Models
         }
         public IQueryable<Bowler> bowlers => _context.bowlers;
         public IQueryable<Team> teams => _context.teams;
+
+        public void SaveBowler(Bowler bowler)
+        {
+            _context.AttachRange(bowler.Team);
+            if (bowler.BowlerID == 0)
+            {
+                _context.bowlers.Add(bowler);
+            } else
+            {
+                _context.Update(bowler);
+            }
+            _context.SaveChanges();
+        }
+        public void DeleteBowler(Bowler bowler)
+        {
+            var teams = _context.teams.ToList();
+            _context.Remove(bowler);
+            _context.SaveChanges();
+        }
     }
 }

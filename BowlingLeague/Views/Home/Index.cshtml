@@ -6,9 +6,25 @@
 
 <h1>Bowlers</h1>
 
-<ul>
+<div class="d-flex flex-wrap justify-content-center">
     @foreach (Bowler bowler in Model)
     {
-        <li>@bowler.BowlerID - @bowler.BowlerFirstName - @bowler.Team.TeamName</li>
+
+        <div class="card text-center m-1" style="width: 18rem;">
+            <div class="card-body">
+                @if (bowler.BowlerMiddleInit == null || bowler.BowlerMiddleInit == "")
+                {
+                    <h5 class="card-title">@bowler.BowlerFirstName @bowler.BowlerLastName</h5> }
+                else
+                {
+                    <h5 class="card-title">@bowler.BowlerFirstName @bowler.BowlerMiddleInit. @bowler.BowlerLastName</h5>
+                }
+
+                <h6 class="card-subtitle mb-2 text-muted">@bowler.BowlerPhoneNumber</h6>
+                <p class="card-text">@bowler.BowlerAddress,<br /> @bowler.BowlerCity, @bowler.BowlerState @bowler.BowlerZip</p>
+                <a asp-controller="Home" asp-action="Edit" asp-route-bowlerid="@bowler.BowlerID" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-controller="Home" asp-action="Delete" asp-route-bowlerid="@bowler.BowlerID" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </div>
     }
-</ul>
+</div>
