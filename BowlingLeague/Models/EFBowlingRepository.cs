@@ -17,7 +17,7 @@ namespace BowlingLeague.Models
 
         public void SaveBowler(Bowler bowler)
         {
-            _context.AttachRange(bowler.Team);
+            _context.AttachRange(_context.teams.Single(x => x.TeamID == bowler.TeamID));
             if (bowler.BowlerID == 0)
             {
                 _context.bowlers.Add(bowler);

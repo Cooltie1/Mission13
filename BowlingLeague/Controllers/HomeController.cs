@@ -19,12 +19,23 @@ namespace BowlingLeague.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string team = "")
         {
+            ViewBag.selected = team;
             var teams = _repo.teams;
-            var bowlers = _repo.bowlers;
-            // .inlude(x => team) watch 05 video for help
+            ViewBag.teams = teams;
+            if (team == "")
+            {
+                
+                
+                var bowlersTmp = _repo.bowlers;
+                // .inlude(x => team) watch 05 video for help
+                return View(bowlersTmp);
+            }
+            
+            var bowlers = _repo.bowlers.Where(b => b.Team.TeamName == team);
             return View(bowlers);
+            
         }
 
         public IActionResult Privacy()
@@ -57,6 +68,25 @@ namespace BowlingLeague.Controllers
            Bowler bowler =  _repo.bowlers.Single(x => x.BowlerID == bowlerid);
             _repo.DeleteBowler(bowler);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddBowler()
+        {
+            ViewBag.teams = _repo.teams;
+            return View(new Bowler());
+        }
+
+        [HttpPost]
+        public IActionResult AddBowler(Bowler bowler)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.SaveBowler(bowler);
+                return RedirectToAction("Index");
+            }
+            ViewBag.teams = _repo.teams;
+            return View("AddBowler");
         }
     }
 }

@@ -7,7 +7,56 @@
 
 
 <form method="post">
-
-    <input class="form-control" id="inputBowlerID" asp-for="BowlerID" />
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label asp-for="BowlerFirstName">First Name</label>
+            <input class="form-control" id="inputFName" placeholder="John" asp-for="BowlerFirstName" />
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="BowlerMiddleInit">Middle Init.</label>
+            <input class="form-control" id="inputMInit" placeholder="K" asp-for="BowlerMiddleInit" />
+        </div>
+        <div class="form-group col-md-5">
+            <label asp-for="BowlerLastName">Last Name</label>
+            <input class="form-control" id="inputLName" placeholder="Smith" asp-for="BowlerLastName" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label asp-for="BowlerAddress">Address</label>
+            <input class="form-control" id="inputAddress" placeholder="1234 Main St." asp-for="BowlerAddress" />
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="BowlerCity">City</label>
+            <input class="form-control" id="inputCity" placeholder="Los Angeles" asp-for="BowlerCity" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label asp-for="BowlerState">State</label>
+            <input class="form-control" id="inputState" placeholder="CA" asp-for="BowlerState" />
+        </div>
+        <div class="form-group col-md-2">
+            <label asp-for="BowlerZip">Zipcode</label>
+            <input class="form-control" id="inputZip" placeholder="98765" asp-for="BowlerZip" />
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="BowlerPhoneNumber">Phone Number</label>
+            <input class="form-control" id="inputPhone" placeholder="(800) 000-0000" asp-for="BowlerPhoneNumber" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Team">Team</label>
+            <select class="form-control" id="inputTeam" asp-for="TeamID">
+                <option></option>
+                @foreach (Team team in ViewBag.teams)
+                {
+                    <option value="@team.TeamID">@team.TeamName</option>
+                }
+            </select>
+        </div>
+    </div>
+    <input class="form-control" id="inputBowlerID" asp-for="BowlerID" hidden />
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
