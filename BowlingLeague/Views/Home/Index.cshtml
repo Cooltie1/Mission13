@@ -6,30 +6,38 @@
 
 <div class="d-flex justify-content-between">
     <div>
-        <h1>Bowlers</h1>
+        @if (ViewBag.selected == "" || ViewBag.selected == null)
+        {
+            <h1>All Bowlers</h1>
+        }
+        else
+        {
+            <h1>The @ViewBag.selected</h1>
+        }
+
     </div>
-    <div>
-        <div class="d-flex flex-wrap justify-content-center">
-            <div>
-                <a asp-controller="Home" asp-action="Index" asp-route-team=""
-                   class="nav-link @(ViewBag.selected == null || ViewBag.selected == "" ? "font-weight-bold" : "")">
-                    All
-                </a>
-            </div>
-            @foreach (Team team in ViewBag.teams)
-            {
-                <a asp-controller="Home" asp-action="Index" asp-route-team="@team.TeamName"
-                   class="nav-link  @(ViewBag.selected == team.TeamName ? "font-weight-bold" : "")">
-                    @team.TeamName
-                </a>
-            }
-        </div>
-    </div>
+    
     <div>
         <a class="btn btn-success text-white" asp-controller="Home" asp-action="AddBowler">Create New</a>
     </div>
 </div>
-
+<div>
+    <div class="d-flex flex-wrap justify-content-center">
+        <div>
+            <a asp-controller="Home" asp-action="Index" asp-route-team=""
+               class="nav-link @(ViewBag.selected == null || ViewBag.selected == "" ? "font-weight-bold" : "")">
+                All
+            </a>
+        </div>
+        @foreach (Team team in ViewBag.teams)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-team="@team.TeamName"
+               class="nav-link  @(ViewBag.selected == team.TeamName ? "font-weight-bold" : "")">
+                @team.TeamName
+            </a>
+        }
+    </div>
+</div>
 
 <div class="d-flex flex-wrap justify-content-center">
     @foreach (Bowler bowler in Model)

@@ -7,6 +7,7 @@
 
 
 <form method="post">
+    <div class="alert alert-danger" role="alert" asp-validation-summary="All" id="validationalert"></div>
     <div class="form-row">
         <div class="form-group col-md-5">
             <label asp-for="BowlerFirstName">First Name</label>
@@ -46,7 +47,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label asp-for="Team">Team</label>
             <select class="form-control" id="inputTeam" asp-for="TeamID">
                 <option></option>
